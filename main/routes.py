@@ -9,8 +9,8 @@ def index():
 def home():
     return render_template('home.html', current_user=current_user)
 
-@main_bp.route('/', methods=['GET', 'POST'])
+@main_bp.route('/about', methods=['GET', 'POST'])
 def about():
-    return render_template('base.html', current_user=current_user)
+    return render_template('about.html', current_user=current_user)
 
 

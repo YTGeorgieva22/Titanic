@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+
+{% block title %}About Titanic Dataset{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
+
+<section class="about-hero">
+    <div class="about-icon">
+        <i class="fas fa-ship"></i>
+    </div>
+
+    <h1>About the Titanic Dataset</h1>
+
+    <p>
+        Understanding the historical data, methodology, and machine learning
+        approach behind survival predictions
+    </p>
+</section>
+
+<section class="about-card dataset-card">
+    <div class="card-header">
+        <div class="card-icon blue">
+            <i class="fas fa-database"></i>
+        </div>
+
+        <div>
+            <h2>Dataset Information</h2>
+            <span>Real passenger data from the 1912 Titanic disaster</span>
+        </div>
+    </div>
+
+    <div class="dataset-grid">
+        <div>
+            <h3>Dataset Details</h3>
+
+            <ul class="details-list">
+                <li><strong>Training Samples:</strong> 891 passengers</li>
+                <li><strong>Test Samples:</strong> 418 passengers</li>
+                <li><strong>Features:</strong> 11 attributes</li>
+                <li><strong>Target:</strong> Survived (0 = No, 1 = Yes)</li>
+                <li><strong>Source:</strong> Kaggle Competition</li>
+            </ul>
+        </div>
+
+        <div>
+            <h3>Key Features</h3>
+
+            <ul class="details-list">
+                <li><strong>Pclass:</strong> Passenger class (1st, 2nd, 3rd)</li>
+                <li><strong>Sex:</strong> Gender of passenger</li>
+                <li><strong>Age:</strong> Age in years</li>
+                <li><strong>SibSp:</strong> # of siblings/spouses aboard</li>
+                <li><strong>Parch:</strong> # of parents/children aboard</li>
+                <li><strong>Fare:</strong> Passenger fare paid</li>
+                <li><strong>Embarked:</strong> Port of embarkation</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="about-card methodology-card">
+    <div class="card-header">
+        <div class="card-icon teal">
+            <i class="fas fa-chart-line"></i>
+        </div>
+
+        <div>
+            <h2>ML Methodology</h2>
+            <span>Perceptron algorithm for binary classification</span>
+        </div>
+    </div>
+
+    <div class="methodology-content">
+        <h3>Algorithm: Perceptron</h3>
+
+        <p class="methodology-text">
+            The Perceptron is a simple neural network algorithm for supervised
+            learning of binary classifiers. It learns a linear decision boundary
+            by iteratively adjusting weights based on misclassified examples.
+            The algorithm predicts survival (1) or non-survival (0) based on
+            passenger features.
+        </p>
+
+        <div class="formula-box">
+            <div class="formula-main">
+                ŷ = activation(w₀ + w₁x₁ + w₂x₂ + ... + wₙxₙ)
+            </div>
+
+            <div class="formula-sub">
+                where activation(z) = 1 if z ≥ 0, else 0
+            </div>
+        </div>
+
+        <div class="method-grid">
+            <div class="method-box blue-soft">
+                <h4>Training Phase</h4>
+                <p>
+                    Weights are updated iteratively using the perceptron
+                    learning rule on training data
+                </p>
+            </div>
+
+            <div class="method-box teal-soft">
+                <h4>Weight Updates</h4>
+                <p>
+                    w = w + η(y - ŷ)x where η is the learning rate
+                </p>
+            </div>
+
+            <div class="method-box purple-soft">
+                <h4>Prediction</h4>
+                <p>
+                    New passengers classified using learned decision boundary
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about-card feature-card-section">
+    <div class="card-header">
+        <div class="card-icon purple">
+            <i class="fas fa-file-alt"></i>
+        </div>
+
+        <div>
+            <h2>Feature Descriptions</h2>
+        </div>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-item blue-border">
+            <h4>Pclass (Passenger Class)</h4>
+            <p>
+                A proxy for socio-economic status. 1st class passengers had
+                higher survival rates.
+            </p>
+            <span>Values: 1, 2, 3</span>
+        </div>
+
+        <div class="feature-item teal-border">
+            <h4>Sex (Gender)</h4>
+            <p>
+                "Women and children first" policy significantly affected
+                survival rates.
+            </p>
+            <span>Values: male, female</span>
+        </div>
+
+        <div class="feature-item purple-border">
+            <h4>Age</h4>
+            <p>
+                Children had higher priority for lifeboats. Age ranges from
+                0.42 to 80 years.
+            </p>
+            <span>Continuous variable</span>
+        </div>
+
+        <div class="feature-item violet-border">
+            <h4>SibSp (Siblings/Spouses)</h4>
+            <p>
+                Number of siblings or spouse aboard. Family size affected
+                survival probability.
+            </p>
+            <span>Values: 0-8</span>
+        </div>
+
+        <div class="feature-item pink-border">
+            <h4>Parch (Parents/Children)</h4>
+            <p>
+                Number of parents or children aboard. Related to family
+                group dynamics.
+            </p>
+            <span>Values: 0-6</span>
+        </div>
+
+        <div class="feature-item orange-border">
+            <h4>Fare</h4>
+            <p>
+                Ticket price paid. Correlates with class and cabin location
+                on the ship.
+            </p>
+            <span>Range: £0 - £512</span>
+        </div>
+
+        <div class="feature-item green-border">
+            <h4>Embarked (Port)</h4>
+            <p>
+                Port of embarkation: C=Cherbourg, Q=Queenstown, S=Southampton.
+            </p>
+            <span>Values: C, Q, S</span>
+        </div>
+    </div>
+</section>
+
+<section class="about-card stats-card">
+    <div class="card-header">
+        <div class="card-icon green">
+            <i class="fas fa-user-friends"></i>
+        </div>
+
+        <div>
+            <h2>Survival Statistics</h2>
+            <span>Historical survival rates from the Titanic dataset</span>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-box stat-blue">
+            <h3>38.4%</h3>
+            <p>Overall Survival</p>
+        </div>
+
+        <div class="stat-box stat-pink">
+            <h3>74.2%</h3>
+            <p>Female Survival</p>
+        </div>
+
+        <div class="stat-box stat-teal">
+            <h3>18.9%</h3>
+            <p>Male Survival</p>
+        </div>
+
+        <div class="stat-box stat-purple">
+            <h3>63.0%</h3>
+            <p>1st Class</p>
+        </div>
+    </div>
+
+    <div class="insight-box">
+        <div class="insight-header">
+            <i class="fas fa-anchor"></i>
+            <h4>Historical Insight</h4>
+        </div>
+
+        <p>
+            The "women and children first" protocol, combined with
+            socio-economic factors (passenger class), were the strongest
+            predictors of survival. First-class passengers had better access
+            to lifeboats, while third-class passengers faced locked gates and
+            greater distances to the deck.
+        </p>
+    </div>
+</section>
+{% endblock %}
