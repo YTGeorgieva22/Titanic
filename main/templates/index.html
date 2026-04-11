@@ -2,96 +2,174 @@
 
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
 <section class="hero-section">
     <div class="hero-icon">
-    <img src="{{ url_for('static', filename='logo.png') }}"
-         alt="Shield Logo"
-         class="shield-logo">
-</div>
+        <img src="{{ url_for('static', filename='logo.png') }}"
+             alt="Titanic Logo"
+             class="hero-logo">
+    </div>
 
-    <h1>Banknote Authentication System</h1>
-    <p class="hero-text">
-        Leveraging machine learning and logistic regression to detect counterfeit
-        currency with precision and reliability
+    <h1>Titanic Survival Prediction</h1>
+
+    <p class="hero-subtitle">
+        Using machine learning and perceptron algorithm to predict passenger
+        survival from the historic 1912 Titanic disaster
     </p>
 
     <div class="hero-buttons">
-        <a href="#" class="btn-primary">
-            Get Started <span>&rarr;</span>
+        <a href="#features" class="btn btn-primary">
+            Get Started
+            <span>&rarr;</span>
         </a>
-        <a href="#" class="btn-secondary">Learn More</a>
+
+        <a href="#algorithm" class="btn btn-secondary">
+            Learn More
+        </a>
     </div>
 </section>
 
-<section class="features-section">
+<section id="features" class="features-section">
     <h2>Key Features</h2>
 
-<div class="feature-cards">
-    <div class="feature-card blue-card">
-        <div class="feature-icon blue">
-            <i class="fas fa-brain"></i>
-        </div>
-        <h3>Machine Learning</h3>
-        <p>
-            Advanced logistic regression algorithm trained on real banknote features
-        </p>
-    </div>
+    <div class="features-grid">
+        <div class="feature-card blue-card">
+            <div class="feature-icon blue">
+                <i class="fas fa-anchor"></i>
+            </div>
 
-    <div class="feature-card green-card">
-        <div class="feature-icon green">
-            <i class="fas fa-lock"></i>
-        </div>
-        <h3>High Accuracy</h3>
-        <p>
-            Reliable detection with optimized parameters and extensive validation
-        </p>
-    </div>
+            <h3>Perceptron Algorithm</h3>
 
-    <div class="feature-card purple-card">
-        <div class="feature-icon purple">
-            <i class="fas fa-chart-line"></i>
+            <p>
+                Binary classification neural network trained on
+                historical Titanic passenger data
+            </p>
         </div>
-        <h3>Real-time Analysis</h3>
-        <p>
-            Instant predictions with detailed probability scores and metrics
-        </p>
-    </div>
-</div>
 
+        <div class="feature-card teal-card">
+            <div class="feature-icon teal">
+                <i class="fas fa-life-ring"></i>
+            </div>
+
+            <h3>Historical Dataset</h3>
+
+            <p>
+                Real data from 891 passengers including demographics,
+                cabin class, and survival outcomes
+            </p>
+        </div>
+
+        <div class="feature-card purple-card">
+            <div class="feature-icon purple">
+                <i class="fas fa-chart-line"></i>
+            </div>
+
+            <h3>Real-time Predictions</h3>
+
+            <p>
+                Instant survival probability analysis based on
+                passenger characteristics and voyage details
+            </p>
+        </div>
+    </div>
 </section>
 
-<section class="algorithm-section">
+<section id="algorithm" class="algorithm-section">
     <div class="algorithm-card">
-        <h2>Logistic Regression Algorithm</h2>
-        <p class="subtitle">
-            Our system uses logistic regression, a powerful statistical method for binary classification
+        <h2>Perceptron Algorithm</h2>
+
+        <p class="algorithm-subtitle">
+            A fundamental neural network model for binary classification tasks
         </p>
 
         <div class="algorithm-grid">
-            <div>
-                <h3>How It Works</h3>
+            <div class="algorithm-column">
+                <div class="section-title">
+                    <i class="fas fa-user-friends"></i>
+                    <h3>How It Works</h3>
+                </div>
+
                 <ul>
-                    <li>Extracts key features from banknote images</li>
-                    <li>Processes variance, skewness, curtosis, and entropy</li>
-                    <li>Applies sigmoid function for probability calculation</li>
-                    <li>Classifies as authentic or counterfeit</li>
+                    <li>Analyzes passenger features (age, class, gender, etc.)</li>
+                    <li>Computes weighted sum of input features</li>
+                    <li>Applies activation function for classification</li>
+                    <li>Predicts survived (1) or perished (0)</li>
                 </ul>
             </div>
 
-            <div>
+            <div class="algorithm-column">
                 <h3>Key Benefits</h3>
+
                 <ul>
-                    <li>Fast and efficient processing</li>
-                    <li>Interpretable results and weights</li>
-                    <li>Scalable to large datasets</li>
-                    <li>Continuous improvement through training</li>
+                    <li>Simple and interpretable results</li>
+                    <li>Fast training and prediction</li>
+                    <li>Clear feature weight analysis</li>
+                    <li>Foundation of neural networks</li>
                 </ul>
             </div>
         </div>
 
-        <a href="#" class="btn-secondary dataset-btn">
-            Learn About Our Dataset
+        <a href="#" class="dataset-btn">
+            Explore the Dataset
         </a>
     </div>
 </section>
+
+<section class="disaster-section">
+    <div class="disaster-grid">
+        <div class="disaster-left">
+            <h2>The Titanic Disaster</h2>
+
+            <p>
+                On April 15, 1912, the RMS Titanic sank after striking an iceberg
+                during her maiden voyage. Of the 2,224 passengers and crew aboard,
+                more than 1,500 perished, making it one of the deadliest peacetime
+                maritime disasters in history.
+            </p>
+
+            <p>
+                Our machine learning model analyzes historical passenger data to
+                understand the factors that influenced survival rates, including
+                passenger class, gender, age, and family relationships.
+            </p>
+
+            <div class="stats-row">
+                <div class="stat-box blue">
+                    <h3>2,224</h3>
+                    <span>Total Aboard</span>
+                </div>
+
+                <div class="stat-box red">
+                    <h3>1,502</h3>
+                    <span>Casualties</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="survival-card">
+            <h3>Survival Factors</h3>
+
+            <div class="factor-item">
+                <span>Passenger Class</span>
+                <small>High Impact</small>
+            </div>
+
+            <div class="factor-item">
+                <span>Gender</span>
+                <small>High Impact</small>
+            </div>
+
+            <div class="factor-item">
+                <span>Age</span>
+                <small>Medium Impact</small>
+            </div>
+
+            <div class="factor-item">
+                <span>Family Aboard</span>
+                <small>Medium Impact</small>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
