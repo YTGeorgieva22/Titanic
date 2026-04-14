@@ -8,6 +8,7 @@ from flask import render_template, redirect, url_for, flash, session
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    login_user(current_user, remember=False)
     if current_user.is_authenticated:
         return redirect(url_for('main_bp.dashboard'))
 
