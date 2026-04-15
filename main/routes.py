@@ -1,9 +1,9 @@
 from flask_login import current_user, login_required
-from flask import Blueprint, render_template, redirect, url_for
-from ml.service import get_perceptron_results
+from flask import Blueprint, render_template, redirect, url_for,request
 from __init__ import db
 from auth.models import ModelTraining, Prediction
 from ml.service import get_perceptron_results
+from ml.service import predict_passenger
 from . import main_bp
 
 @main_bp.route('/', methods=['GET', 'POST'])
@@ -92,3 +92,25 @@ def about():
     return render_template('about.html', current_user=current_user)
 
 
+@main_bp.route('/predict', methods=['GET', 'POST'])
+@login_required
+def predict():
+    prediction = None
+    survived = False
+    probability = None
+    confidence = None
+
+    if request.method == 'POST':
+        # your prediction logic here
+        prediction = "Likely Survived"
+        survived = True
+        probability = 90.0
+        confidence = 85.2
+
+    return render_template(
+        'predict.html',
+        prediction=prediction,
+        survived=survived,
+        probability=probability,
+        confidence=confidence
+    )

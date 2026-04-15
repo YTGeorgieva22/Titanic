@@ -1,21 +1,20 @@
-# ml/service.py
-
 from ml.algorithms.perceptron import Perceptron
 from ml.utilis import load_training_data
 
+# load and train once
+X_train, y_train, X_val, y_val = load_training_data("train.csv")
+
+model = Perceptron(
+    n_features=len(X_train[0]),
+    learning_rate=0.01,
+    epochs=30,
+    threshold=0.0
+)
+
+model.fit(X_train, y_train)
+
 
 def get_perceptron_results():
-    X_train, y_train, X_val, y_val = load_training_data("train.csv")
-
-    model = Perceptron(
-        n_features=len(X_train[0]),
-        learning_rate=0.01,
-        epochs=30,
-        threshold=0.0
-    )
-
-    model.fit(X_train, y_train)
-
     predictions = model.predict(X_val)
     accuracy = model.accuracy(X_val, y_val)
     confusion_matrix = model.confusion_matrix(X_val, y_val)
@@ -33,4 +32,13 @@ def get_perceptron_results():
         "confusion_matrix": confusion_matrix,
         "epoch_errors": model.epoch_errors,
         "comparison": comparison
+    }
+
+
+def predict_passenger(features):
+    prediction = model.predict_one(features)
+
+    return {
+        "prediction": prediction,
+        "label": "Survived" if prediction == 1 else "Did Not Survive"
     }

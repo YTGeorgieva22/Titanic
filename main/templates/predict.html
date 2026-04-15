@@ -1,0 +1,260 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='predict.css') }}">
+
+<div class="predict-page">
+    <div class="predict-container">
+
+        <!-- Header -->
+        <div class="predict-header">
+            <div class="predict-header-icon">
+                <i class="bi bi-people-fill"></i>
+            </div>
+
+            <div>
+                <h1 class="predict-title">Predict Passenger Survival</h1>
+                <p class="predict-subtitle">
+                    Enter passenger information to predict Titanic survival probability
+                </p>
+            </div>
+        </div>
+
+        <div class="predict-layout">
+
+            <!-- Main Form -->
+            <section class="predict-card">
+                <h2 class="card-title">Passenger Information</h2>
+                <p class="card-subtitle">
+                    Enter the passenger details for prediction
+                </p>
+
+                <form method="POST">
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Passenger Class</label>
+                            <select name="pclass" class="input-field" required>
+                                <option value="">Select class</option>
+                                <option value="1">1st Class</option>
+                                <option value="2">2nd Class</option>
+                                <option value="3">3rd Class</option>
+                            </select>
+                            <small>Socio-economic status</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select name="sex" class="input-field" required>
+                                <option value="">Select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                            <small>Passenger gender</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Age</label>
+                            <input type="number" step="0.1" name="age"
+                                   class="input-field"
+                                   placeholder="e.g., 29" required>
+                            <small>Age in years</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Siblings/Spouses Aboard</label>
+                            <input type="number" name="sibsp"
+                                   class="input-field"
+                                   placeholder="e.g., 1" required>
+                            <small>Number of siblings/spouses</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Parents/Children Aboard</label>
+                            <input type="number" name="parch"
+                                   class="input-field"
+                                   placeholder="e.g., 0" required>
+                            <small>Number of parents/children</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Fare</label>
+                            <input type="number" step="0.01" name="fare"
+                                   class="input-field"
+                                   placeholder="e.g., 7.25" required>
+                            <small>Ticket price in £</small>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Port of Embarkation</label>
+                            <select name="embarked" class="input-field" required>
+                                <option value="">Select port</option>
+                                <option value="S">Southampton</option>
+                                <option value="C">Cherbourg</option>
+                                <option value="Q">Queenstown</option>
+                            </select>
+                            <small>Where passenger boarded</small>
+                        </div>
+                    </div>
+
+                    <div class="button-row">
+                        <button type="submit" class="btn-primary">
+                            <i class="bi bi-stars me-2"></i>
+                            Predict Survival
+                        </button>
+
+                        <button type="button"
+        class="btn-secondary"
+        onclick="window.location='{{ url_for('main_bp.predict') }}'">
+    Reset
+</button>
+                    </div>
+                </form>
+
+                <!-- Result Panel -->
+                {% if prediction %}
+                <div class="prediction-panel {% if survived %}success-panel{% else %}danger-panel{% endif %}">
+                    <div class="prediction-top">
+                        <div class="prediction-status">
+                            <div class="prediction-icon">
+                                {% if survived %}
+                                <i class="bi bi-check-lg"></i>
+                                {% else %}
+                                <i class="bi bi-x-lg"></i>
+                                {% endif %}
+                            </div>
+
+                            <div>
+                                <h3 class="prediction-title">
+                                    {% if survived %}
+                                        Likely Survived
+                                    {% else %}
+                                        Likely Did Not Survive
+                                    {% endif %}
+                                </h3>
+
+                                <p class="prediction-desc">
+                                    Prediction completed with perceptron model
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric">
+                        <div class="metric-header">
+                            <span>Survival Probability</span>
+                            <span>{{ probability|default(90.0) }}%</span>
+                        </div>
+
+                        <div class="progress-track">
+                            <div class="progress-fill"
+                                 style="width: {{ probability|default(90.0) }}%;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric">
+                        <div class="metric-header">
+                            <span>Model Confidence</span>
+                            <span>{{ confidence|default(85.2) }}%</span>
+                        </div>
+
+                        <div class="progress-track">
+                            <div class="progress-fill secondary"
+                                 style="width: {{ confidence|default(85.2) }}%;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="prediction-message">
+                        <i class="bi bi-info-circle"></i>
+
+                        <span>
+                            {% if survived %}
+                                Based on the passenger characteristics, the model predicts this passenger would likely survive the Titanic disaster.
+                            {% else %}
+                                Based on the passenger characteristics, the model predicts this passenger would likely not survive the Titanic disaster.
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    <button class="analysis-button" type="button">
+                        <i class="bi bi-graph-up-arrow me-2"></i>
+                        View Detailed Analysis
+                    </button>
+                </div>
+                {% endif %}
+            </section>
+
+           <div class="sidebar">
+
+    <!-- How It Works -->
+    <div class="sidebar-card">
+        <h3 class="sidebar-title">
+            <i class="bi bi-info-circle sidebar-icon blue-icon"></i>
+            How It Works
+        </h3>
+
+        <p class="sidebar-text">
+            Our perceptron model analyzes passenger features to predict survival
+            probability using the binary classification algorithm.
+        </p>
+
+        <h4 class="sidebar-subtitle">Prediction Process:</h4>
+
+        <ol class="sidebar-list">
+            <li>Input features are encoded</li>
+            <li>Weighted sum is calculated</li>
+            <li>Activation function applied</li>
+            <li>Binary prediction (0 or 1)</li>
+        </ol>
+    </div>
+
+    <!-- Key Factors -->
+    <div class="sidebar-card key-card">
+        <h3 class="sidebar-title">
+            <i class="bi bi-anchor sidebar-icon anchor-icon"></i>
+            Key Factors
+        </h3>
+
+        <div class="factor-row">
+            <span>Gender (Female):</span>
+            <strong class="factor-high">High ↑</strong>
+        </div>
+
+        <div class="factor-row">
+            <span>1st Class:</span>
+            <strong class="factor-high">High ↑</strong>
+        </div>
+
+        <div class="factor-row">
+            <span>Child (Age &lt; 16):</span>
+            <strong class="factor-high">High ↑</strong>
+        </div>
+
+        <div class="factor-row">
+            <span>3rd Class Male:</span>
+            <strong class="factor-low">Low ↓</strong>
+        </div>
+    </div>
+
+    <!-- Quick Tip -->
+    <div class="sidebar-card tip-card">
+        <h3 class="sidebar-title">
+            <i class="bi bi-ship sidebar-icon ship-icon"></i>
+            Quick Tip
+        </h3>
+
+        <p class="sidebar-text">
+            Use the example buttons to quickly test the model with realistic
+            passenger profiles from the Titanic dataset.
+        </p>
+    </div>
+
+</div>
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}
