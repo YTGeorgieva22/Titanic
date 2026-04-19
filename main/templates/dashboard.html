@@ -87,7 +87,7 @@
 
         <div class="quick-actions-grid">
 
-            <a href="{{ url_for('main_bp.index') }}" class="action-card blue-card">
+            <a href="{{ url_for('main_bp.predict') }}" class="action-card blue-card">
                 <div class="action-icon blue">
                     <i class="fas fa-ship"></i>
                 </div>
@@ -101,7 +101,7 @@
                 </div>
             </a>
 
-            <a href="{{ url_for('main_bp.index') }}" class="action-card teal-card">
+            <a href="{{ url_for('main_bp.train_model') }}" class="action-card teal-card">
                 <div class="action-icon teal">
                     <i class="fas fa-chart-line"></i>
                 </div>
@@ -115,7 +115,7 @@
                 </div>
             </a>
 
-            <a href="{{ url_for('main_bp.index') }}" class="action-card purple-card">
+            <a href="{{ url_for('main_bp.results') }}" class="action-card purple-card">
                 <div class="action-icon purple">
                     <i class="fas fa-chart-bar"></i>
                 </div>
@@ -180,10 +180,7 @@
                 {% endif %}
             </div>
 
-            <a href="{{ url_for('main_bp.index') }}" class="history-btn">
-                View All History
-                <span>&rarr;</span>
-            </a>
+
         </div>
 
         <div class="dataset-card">
